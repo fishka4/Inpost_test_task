@@ -21,7 +21,13 @@ test.describe('Title', () => {
     await pageFactory.getMainPage().navigateTo();
   });
 
+  test.afterEach(() => {
+    pageFactory = null;
+  });
+
   test('Search', async () => {
+    if (!pageFactory) throw new Error('Page factory has not been initialized');
+    
     const category = 'Phones';
     const total = '800';
     const orderInfo: ProductInfo = {
